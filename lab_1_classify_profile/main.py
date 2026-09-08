@@ -28,11 +28,29 @@ def tokenize(text: str) -> Sequence[str] | None:
     """
 
 
+if not isinstance(text, str):
+        return None
+
+    tokens = []
+    word = ""
+
+    for char in text.lower():
+        if char.isalpha():
+            word += char
+        elif word:
+            tokens.append(word)
+            word = ""
+
+    if word:
+        tokens.append(word)
+
+    return tokens
+
 def remove_stop_words(tokens: Sequence[str], stop_words: Sequence[str]) -> Sequence[str] | None:
     """
     Removes stop words
 
-    Args:
+    # Args:
         tokens (Sequence[str]): Sequence of tokens
         stop_words (Sequence[str]): Sequence of stop words (can be empty)
     Returns:
