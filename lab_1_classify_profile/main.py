@@ -60,12 +60,9 @@ def remove_stop_words(tokens: Sequence[str], stop_words: Sequence[str]) -> Seque
     if not isinstance(tokens, (list, tuple)):
         return None
 
-    if not isinstance(stop_words, (list, tuple)):
-        return tokens
-
     for word in stop_words:
         if not isinstance(word, str):
-            return tokens
+            return None
 
     result = []
 
