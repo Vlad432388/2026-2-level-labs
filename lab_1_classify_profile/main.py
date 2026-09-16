@@ -31,17 +31,16 @@ def tokenize(text: str) -> Sequence[str] | None:
         return None
 
     tokens = []
-    word = ""
 
-    for char in text.lower():
-        if char.isalpha():
-            word += char
-        elif word:
+    for part in text.lower().split():
+        word = ""
+
+        for char in part:
+            if char.isalpha():
+                word += char
+
+        if word:
             tokens.append(word)
-            word = ""
-
-    if word:
-        tokens.append(word)
 
     return tokens
 
@@ -91,6 +90,9 @@ def calculate_frequencies(tokens: Sequence[str]) -> dict[str, float] | None:
     if not isinstance(tokens, (list, tuple)):
         return None
 
+    for token in tokens:
+        if not isinstance(token, str):
+            return None
     frequencies = {}
 
     for token in tokens:
