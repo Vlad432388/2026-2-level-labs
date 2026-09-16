@@ -3,6 +3,7 @@ Language detection starter.
 """
 
 # pylint: disable=unused-variable, duplicate-code
+
 from lab_1_classify_profile.main import (
     calculate_frequencies,
     get_top_n_words,
