@@ -57,19 +57,17 @@ def remove_stop_words(tokens: Sequence[str], stop_words: Sequence[str]) -> Seque
         Returns None in case of incorrect input types.
     """
 
-    if not isinstance(tokens, (list, tuple)):
+    if not isinstance(tokens, Sequence):
         return None
 
-    for token in tokens:
-        if not isinstance(token, str):
-            return None
-
-    if not isinstance(stop_words, (list, tuple)):
+    if not all(isinstance(token, str) for token in tokens):
         return None
 
-    for word in stop_words:
-        if not isinstance(word, str):
-            return None
+    if not isinstance(stop_words, Sequence):
+        return None
+
+    if not all(isinstance(word, str) for word in stop_words):
+        return None
 
     result = []
 
@@ -91,19 +89,15 @@ def calculate_frequencies(tokens: Sequence[str]) -> dict[str, float] | None:
         Returns None in case of incorrect input types.
     """
 
-    if not isinstance(tokens, (list, tuple)):
+    if not isinstance(tokens, Sequence):
         return None
 
-    for token in tokens:
-        if not isinstance(token, str):
-            return None
+    if not all(isinstance(token, str)for token in tokens):
+        return None
     frequencies = {}
 
     for token in tokens:
-        if token in frequencies:
-            frequencies[token] += 1
-        else:
-            frequencies[token] = 1
+        frequencies[token] = frequencies.get(token, 0) + 1
 
     total = len(tokens)
 
@@ -126,17 +120,15 @@ def get_top_n_words(freq_dict: dict[str, float], top_n: int) -> Sequence[str] | 
         Returns None in case of incorrect input types or non-positive top_n.
     """
 
-    if not isinstance(freq_dict, dict):
-        return None
-    if not isinstance(top_n, int):
-        return None
-
-    if top_n <= 0:
+    if (
+        not isinstance(freq_dict, dict):
+        or not isinstance(top_n, int)
+        or top_n <= 0
+    ):
         return None
 
     words = list(freq_dict.keys())
-    words.sort()
-    words.sort(key=lambda word: freq_dict[word], reverse=True)
+    words.sort(key=lambda word: (-freq_dict[word], word))
     return words[:top_n]
 # Mark 6.
 
