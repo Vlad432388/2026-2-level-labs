@@ -121,10 +121,9 @@ def get_top_n_words(freq_dict: dict[str, float], top_n: int) -> Sequence[str] | 
     """
 
     if (
-        not isinstance(freq_dict, dict):
-        or not isinstance(top_n, int)
-        or top_n <= 0
-    ):
+            not isinstance(freq_dict, dict)
+            or not isinstance(top_n, int)
+            or top_n <= 0):
         return None
 
     words = list(freq_dict.keys())
