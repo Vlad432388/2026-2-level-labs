@@ -25,7 +25,6 @@ def main() -> None:
         stopwords = file.read().split("\n")
     with open("lab_1_classify_profile/assets/texts/en.txt", "r", encoding="utf-8") as file:
         en_text = file.read()
-    result = None
 
     tokens = tokenize(de_text)
     tokens_without_stopwords = remove_stop_words(tokens, stopwords)
