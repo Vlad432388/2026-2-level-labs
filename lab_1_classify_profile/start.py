@@ -16,6 +16,7 @@ def main() -> None:
     """
     Launches an implementation.
     """
+
     with open("lab_1_classify_profile/assets/texts/de.txt", "r", encoding="utf-8") as file:
         de_text = file.read()
     with open("lab_1_classify_profile/assets/texts/unknown.txt", "r", encoding="utf-8") as file:
@@ -27,18 +28,12 @@ def main() -> None:
     result = None
 
     tokens = tokenize(de_text)
-    if tokens is None:
-        return
-
     tokens_without_stopwords = remove_stop_words(tokens, stopwords)
-    if tokens_without_stopwords is None:
-        return
+    frequencies = calculate_frequencies(tokens_without_stopwords)
+    result = get_top_n_words(frequencies, 7)
 
-    freq_dict = calculate_frequencies(tokens_without_stopwords)
-    if freq_dict is None:
-        return
+    assert result, "Detection result is None"
 
-    result = get_top_n_words(freq_dict, 7)
     print(result)
 
 
