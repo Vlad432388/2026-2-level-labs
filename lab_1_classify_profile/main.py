@@ -37,29 +37,12 @@ def tokenize(text: str) -> Sequence[str] | None:
 
     return tokens
 
-    if not isinstance(text, str):
-        return None
-
-    tokens = []
-
-    for part in text.lower().split():
-        word = ""
-
-        for char in part:
-            if char.isalpha():
-                word += char
-
-        if word:
-            tokens.append(word)
-
-    return tokens
-
 
 def remove_stop_words(tokens: Sequence[str], stop_words: Sequence[str]) -> Sequence[str] | None:
     """
     Removes stop words
 
-    # Args:
+    Args:
         tokens (Sequence[str]): Sequence of tokens
         stop_words (Sequence[str]): Sequence of stop words (can be empty)
     Returns:
@@ -79,26 +62,6 @@ def remove_stop_words(tokens: Sequence[str], stop_words: Sequence[str]) -> Seque
     cleaned_text = [word for word in tokens if word not in stop_words]
 
     return cleaned_text
-
-    if not isinstance(tokens, Sequence):
-        return None
-
-    if not all(isinstance(token, str) for token in tokens):
-        return None
-
-    if not isinstance(stop_words, Sequence):
-        return None
-
-    if not all(isinstance(word, str) for word in stop_words):
-        return None
-
-    result = []
-
-    for token in tokens:
-        if token not in stop_words:
-            result.append(token)
-
-    return result
 
 
 def calculate_frequencies(tokens: Sequence[str]) -> dict[str, float] | None:
@@ -124,23 +87,6 @@ def calculate_frequencies(tokens: Sequence[str]) -> dict[str, float] | None:
         frequency[element] = frequency.get(element, 0.0) + 1.0 / overall_words
 
     return frequency
-
-    if not isinstance(tokens, Sequence):
-        return None
-
-    if not all(isinstance(token, str)for token in tokens):
-        return None
-    frequencies = {}
-
-    for token in tokens:
-        frequencies[token] = frequencies.get(token, 0) + 1
-
-    total = len(tokens)
-
-    for token in frequencies:
-        frequencies[token] = frequencies[token]/total
-
-    return frequencies
 
 
 def get_top_n_words(freq_dict: dict[str, float], top_n: int) -> Sequence[str] | None:
@@ -174,9 +120,6 @@ def get_top_n_words(freq_dict: dict[str, float], top_n: int) -> Sequence[str] | 
 
     return sorted_list
 
-    words = list(freq_dict.keys())
-    words.sort(key=lambda word: (-freq_dict[word], word))
-    return words[:top_n]
 # Mark 6.
 
 
