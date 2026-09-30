@@ -67,6 +67,9 @@ def collect_frequencies(
     if not isinstance(text,str):
         return None
 
+    if not isinstance(end_of_word, str):
+        return None
+
     frequencies = {}
 
     for raw_word in text.split():
