@@ -54,6 +54,8 @@ class TextProcessor:
             elif char.isspace() or not char.isalnum():
                 if tokens and tokens[-1] != self._end_of_word_token:
                     tokens.append(self._end_of_word_token)
+        if not tokens:
+            return None
         return tuple(tokens)
 
     def get_id(self, element: str) -> int | None:
@@ -202,6 +204,8 @@ class TextProcessor:
         In case any of methods used return None, None is returned.
         """
         if corpus is None or not isinstance(corpus, tuple):
+            return None
+        if not corpus:
             return None
         decoded_tokens = []
         for element_id in corpus:
